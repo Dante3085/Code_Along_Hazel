@@ -1,0 +1,9 @@
+#pragma once
+
+// For use bz Hazel Application. The actual Hazel Library doesn't include this file ever.
+
+#include "Hazel/Application.h"
+
+// Entry Point -------------------------------------------------
+#include "Hazel/EntryPoint.h"
+// -------------------------------------------------------------
