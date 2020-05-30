@@ -6,3 +6,4 @@ bin-int/
 
 # Files
 *.user
+Hazel/vendor/vendor_has_third_party_libs_for_hazel.txt
