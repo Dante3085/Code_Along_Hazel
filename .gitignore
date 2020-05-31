@@ -1,9 +1,10 @@
 
 # Directories
 .vs/
-bin/
-bin-int/
+/bin
+/bin-int
 
 # Files
 *.user
-Hazel/vendor/vendor_has_third_party_libs_for_hazel.txt
+vendor_has_third_party_libs_for_hazel.txt
+third_party_libs_for_entire_solution.txt
