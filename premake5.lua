@@ -37,7 +37,8 @@ project "Hazel"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src"
 	}
 	
 	filter "system:windows" -- filters make it possible to use certain kinds of configurations only for specific platforms. In this case Windows.
