@@ -16,7 +16,10 @@ workspace "Hazel"      -- For us, this is the name of the Visual Studio solution
 		"Dist"     -- For distribution, no Logging.
 	}
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}" -- variable in lua
+-- Lua Variables
+
+-- z.B.:        Debug            windows        x86_64
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Hazel"
 	location "Hazel" -- Everything in project Hazel is relative to this path now. location Hazel since this project is inside the Hazel folder in the solution folder.
@@ -70,12 +73,12 @@ project "Sandbox" -- These are all actually function calls, but parantheses can 
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- "a .. b" appends string b to a.
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
-		"%{prj.name}/src/**.h", -- ** means recursively search
+		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
 	}
 
@@ -90,15 +93,15 @@ project "Sandbox" -- These are all actually function calls, but parantheses can 
 		"Hazel"
 	}
 	
-	filter "system:windows" -- filters make it possible to use certain kinds of configurations only for specific platforms. In this case Windows.
+	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "latest" -- Windows SDK Version
+		systemversion "latest" 
 
-		defines
-		{
-			"HZ_PLATFORM_WINDOWS"
-		}
+	defines
+	{
+		"HZ_PLATFORM_WINDOWS"
+	}
 
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
@@ -110,4 +113,34 @@ project "Sandbox" -- These are all actually function calls, but parantheses can 
 
 	filter "configurations:Dist"
 		defines "HZ_DIST"
+		symbols "On"
+
+project "Test"
+	location "Test"
+	kind "ConsoleApp"
+	language "C++"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"%{prj.name}/src"
+	}
+
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest" 
+
+	filter "configurations:Debug"
+		symbols "On"
+
+	filter "configurations:Release"
 		symbols "On"
