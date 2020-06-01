@@ -11,47 +11,47 @@ namespace Hazel
 
 	enum class EventType
 	{
-		None = 0,
-		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+		NONE = 0,
+		WINDOW_CLOSE, WINDOW_RESIZE, WINDOW_FOCUS, WINDOW_LOST_FOCUS, WINDOW_MOVED,
+		APP_TICK, APP_UPDATE, APP_RENDER,
+		KEY_PRESSED, KEY_RELEASED,
+		MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, HZ_MOUSE_MOVED, MOUSE_SCROLLED
 	};
 
 	enum EventCategory
 	{
-		None = 0,
-		EventCategoryApplication   = BIT(0),
-		EventCategoryInput         = BIT(1),
-		EventCategoryKeyboard      = BIT(2),
-		EventCategoryMouse         = BIT(3),
-		EventCategoryMouseButton   = BIT(4)
+		NONE = 0,
+		EVENT_CATEGORY_APPLICATION   = BIT(0),
+		EVENT_CATEGORY_INPUT         = BIT(1),
+		EVENT_CATEGORY_KEYBOARD      = BIT(2),
+		EVENT_CATEGORY_MOUSE         = BIT(3),
+		EVENT_CATEGORY_MOUSE_BUTTON   = BIT(4)
 	};
 
 // ##variable concatenates variable's value with the text left of it.
 // #variable puts string quotes around variable's value.
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
-                               virtual EventType GetEventType() const override { return GetStaticType(); }\
-                               virtual const char* GetName() const override { return #type; }
+#define EVENT_CLASS_TYPE(type) static EventType getStaticType() { return EventType::##type; }\
+                               virtual EventType getEventType() const override { return getStaticType(); }\
+                               virtual const char* getName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
 	class HAZEL_API Event
 	{
 		friend class EventDispatcher;
 	public:
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-		virtual std::string ToString() const { return GetName(); }
+		virtual EventType getEventType() const = 0;
+		virtual const char* getName() const = 0;
+		virtual int getCategoryFlags() const = 0;
+		virtual std::string toString() const { return getName(); }
 
-		inline bool IsInCategory(EventCategory category)
+		inline bool isInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & category;
+			return getCategoryFlags() & category;
 		}
 
 	protected:
-		bool m_Handled = false;
+		bool m_handled = false;
 	};
 
 	class EventDispatcher
@@ -60,28 +60,28 @@ namespace Hazel
 		using EventFn = std::function<bool(T&)>;
 	public:
 		EventDispatcher(Event& event)
-			: m_Event(event)
+			: m_event(event)
 		{
 
 		}
 
 		template <typename T>
-		bool Dispatch(EventFn<T> func)
+		bool dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (m_event.getEventType() == T::getStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_event.m_handled = func(*(T*)&m_event);
 				return true;
 			}
 			return false;
 		}
 
 	private:
-		Event& m_Event;
+		Event& m_event;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, Event const& e)
 	{
-		return os << e.ToString();
+		return os << e.toString();
 	}
 }

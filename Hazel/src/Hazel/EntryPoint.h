@@ -2,6 +2,7 @@
 
 #ifdef HZ_PLATFORM_WINDOWS
 
+// Says that the implementation for Hazel::CreateApplication() will be in a different file.
 extern Hazel::Application* Hazel::CreateApplication();
 
 int main(int argc, char** argv)

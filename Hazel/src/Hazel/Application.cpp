@@ -19,11 +19,11 @@ namespace Hazel
 	{
 		WindowResizeEvent e(1280, 720);
 		
-		if (e.IsInCategory(EventCategory::EventCategoryApplication))
+		if (e.isInCategory(EventCategory::EVENT_CATEGORY_APPLICATION))
 		{
 			HZ_CORE_ERROR("Is in EventCategoryApplication");
 		}
-		if (e.IsInCategory(EventCategory::EventCategoryInput))
+		if (e.isInCategory(EventCategory::EVENT_CATEGORY_INPUT))
 		{
 			HZ_CORE_ERROR("Is in EventCategoryInput");
 		}

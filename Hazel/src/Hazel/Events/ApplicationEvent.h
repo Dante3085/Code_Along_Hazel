@@ -10,26 +10,26 @@ namespace Hazel
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
-			: m_Width(width), m_Height(height)
+			: m_width(width), m_height(height)
 		{
 
 		}
 
-		inline unsigned int GetWidth() const { return m_Width; }
-		inline unsigned int GetHeight() const { return m_Height; }
+		inline unsigned int GetWidth() const { return m_width; }
+		inline unsigned int GetHeight() const { return m_height; }
 
-		std::string ToString() const override
+		std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
+			ss << "WindowResizeEvent: " << m_width << ", " << m_height;
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(WindowResize)
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
 
 	private:
-		unsigned int m_Width, m_Height;
+		unsigned int m_width, m_height;
 	};
 
 	class HAZEL_API WindowCloseEvent : public Event
@@ -41,7 +41,7 @@ namespace Hazel
 		}
 
 		EVENT_CLASS_TYPE(WindowClose)
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
 	};
 
 	class HAZEL_API AppTickEvent : public Event
@@ -53,7 +53,7 @@ namespace Hazel
 		}
 
 		EVENT_CLASS_TYPE(AppTick)
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
 	};
 
 	class HAZEL_API AppUpdateEvent : public Event
@@ -65,7 +65,7 @@ namespace Hazel
 		}
 
 		EVENT_CLASS_TYPE(AppUpdate)
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
 	};
 
 	class HAZEL_API AppRenderEvent : public Event
@@ -77,6 +77,6 @@ namespace Hazel
 		}
 
 		EVENT_CLASS_TYPE(AppRender)
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+		EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
 	};
 }
