@@ -21,6 +21,12 @@ workspace "Hazel"      -- For us, this is the name of the Visual Studio solution
 -- z.B.:        Debug            windows        x86_64
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directiories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+
+include "Hazel/vendor/GLFW" -- Runs the premake5.lua file in the specified folder
+
 project "Hazel"
 	location "Hazel" -- Everything in project Hazel is relative to this path now. location Hazel since this project is inside the Hazel folder in the solution folder.
 	kind "SharedLib" -- SharedLib = DLL
@@ -41,7 +47,14 @@ project "Hazel"
 	includedirs
 	{
 		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 	
 	filter "system:windows" -- filters make it possible to use certain kinds of configurations only for specific platforms. In this case Windows.
