@@ -29,6 +29,9 @@ project "Hazel"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}") -- "a .. b" appends string b to a.
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "hzpch.h"
+	pchsource "Hazel/src/hzpch.cpp" -- visual studio needs a .cpp for precompiled header files.
+
 	files
 	{
 		"%{prj.name}/src/**.h", -- ** means recursively search
