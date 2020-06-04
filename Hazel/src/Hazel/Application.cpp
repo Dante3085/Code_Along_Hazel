@@ -3,31 +3,27 @@
 #include "Application.h"
 
 #include "Hazel/Events/ApplicationEvent.h"
-#include "Hazel/Log.h"
+
+#include <GLFW/glfw3.h>
 
 namespace Hazel
 {
 	Application::Application()
 	{
+		m_window = std::unique_ptr<Window>(Window::create());
 	}
 
 	Application::~Application()
 	{
 	}
 
-	void Application::Run()
+	void Application::run() 
 	{
-		WindowResizeEvent e(1280, 720);
-		
-		if (e.isInCategory(EventCategory::EVENT_CATEGORY_APPLICATION))
+		while (m_running)
 		{
-			HZ_CORE_ERROR("Is in EventCategoryApplication");
+			glClearColor(1, 0, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_window->onUpdate();
 		}
-		if (e.isInCategory(EventCategory::EVENT_CATEGORY_INPUT))
-		{
-			HZ_CORE_ERROR("Is in EventCategoryInput");
-		}
-
-		while (true);
 	}
 }

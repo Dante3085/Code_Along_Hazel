@@ -65,7 +65,7 @@ project "Hazel"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"HZ_BUILD_DLL"
+			"HZ_BUILD_DLL",
 		}
 
 		postbuildcommands -- Automatic DLL placement after project build
@@ -74,7 +74,7 @@ project "Hazel"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines { "HZ_DEBUG", "HZ_ENABLE_ASSERTS" }
 		symbols "On"
 
 	filter "configurations:Release"
@@ -121,7 +121,7 @@ project "Sandbox" -- These are all actually function calls, but parantheses can 
 	}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines { "HZ_DEBUG", "HZ_ENABLE_ASSERTS" }
 		symbols "On"
 
 	filter "configurations:Release"

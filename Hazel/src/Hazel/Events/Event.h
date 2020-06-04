@@ -11,6 +11,9 @@ namespace Hazel
 
 	enum class EventType
 	{
+		// I need to define HZ_MOUSE_MOVED instead of MOUSE_MOVED because MOUSE_MOVED
+		// name-clashes with a #define in wincontypes.h
+
 		NONE = 0,
 		WINDOW_CLOSE, WINDOW_RESIZE, WINDOW_FOCUS, WINDOW_LOST_FOCUS, WINDOW_MOVED,
 		APP_TICK, APP_UPDATE, APP_RENDER,

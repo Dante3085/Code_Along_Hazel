@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Core.h"
-
-#include "Events/Event.h"
+#include "Events/Event.h" // Causes errors when compiling Sandbox
+#include "Window.h"
 
 namespace Hazel
 {
@@ -12,9 +12,13 @@ namespace Hazel
 		Application();
 		virtual ~Application();
 
-		void Run();
+		void run();
+
+	private:
+		std::unique_ptr<Window> m_window;
+		bool m_running = true;
 	};
 
 	// Will be defined in Client.
-	Application* CreateApplication();
+	Application* createApplication();
 }
