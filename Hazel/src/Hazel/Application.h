@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h" // Causes errors when compiling Sandbox
+#include "Events/Event.h"
 #include "Window.h"
 
 namespace Hazel

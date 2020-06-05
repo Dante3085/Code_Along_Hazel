@@ -1,6 +1,6 @@
 #pragma once
 
-// For use bz Hazel Application. The actual Hazel Library doesn't include this file ever.
+// For use by Hazel Application. The actual Hazel Library doesn't include this file ever.
 
 #include "Hazel/Application.h"
 #include "Hazel/Log.h"
